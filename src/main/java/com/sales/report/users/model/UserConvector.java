@@ -20,7 +20,6 @@ public class UserConvector {
                 .email(userDTO.getEmail())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
-                .role(userDTO.getRole())
                 .build();
     }
 }
