@@ -3,19 +3,14 @@ package com.sales.report.security.jwt;
 import com.sales.report.users.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.security.KeyFactory;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.List;
 
 public class JwtHelper {
     private static final Key SECRET_KEY = Jwts.SIG.HS256.key().build();
