@@ -5,6 +5,7 @@ import com.sales.report.users.model.UserDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -15,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
     public void signup(UserDTO userDTO) {
         User user = UserConvector.from(userDTO);
@@ -27,6 +29,7 @@ public class UserService {
         } else {
             user.setRole(Role.USER);
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
     }
 }
