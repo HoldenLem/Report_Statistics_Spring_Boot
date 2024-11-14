@@ -3,6 +3,7 @@ package com.sales.report.statistics.sales;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
@@ -11,6 +12,8 @@ import lombok.experimental.SuperBuilder;
 @Accessors(chain = true)
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+
+@Document(collection = "salesByDate")
 public class SalesByDate extends SalesByAsin {
     private Amount averageSalesPerOrderItem;
     private Amount averageSalesPerOrderItemB2B;
@@ -24,7 +27,7 @@ public class SalesByDate extends SalesByAsin {
     private Amount claimsAmount;
     private Amount shippedProductSales;
     private int unitsShipped;
-
+    private int ordersShipped;
 }
 
 
