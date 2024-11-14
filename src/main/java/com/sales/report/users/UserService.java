@@ -30,4 +30,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         repository.save(user);
     }
+
+    public User findByEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User with the email address '%s' not found", email)));
+    }
 }
