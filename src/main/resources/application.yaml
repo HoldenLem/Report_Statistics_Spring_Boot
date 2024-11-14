@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://user123:password123@localhost:27017/statistics
+      database: statistics

@@ -3,6 +3,7 @@ package com.sales.report.statistics.traffic;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
@@ -11,6 +12,8 @@ import lombok.experimental.SuperBuilder;
 @Accessors(chain = true)
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+
+@Document(collection = "trafficByDate")
 public class TrafficByDates extends Traffic {
     private double orderItemSessionPercentage;
     private double orderItemSessionPercentageB2B;
