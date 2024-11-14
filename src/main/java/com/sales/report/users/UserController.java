@@ -20,4 +20,9 @@ public class UserController {
         service.signup(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
+
+    }
 }
