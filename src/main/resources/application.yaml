@@ -3,3 +3,8 @@ spring:
     mongodb:
       uri: mongodb://user123:password123@localhost:27017/statistics
       database: statistics
+  
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
