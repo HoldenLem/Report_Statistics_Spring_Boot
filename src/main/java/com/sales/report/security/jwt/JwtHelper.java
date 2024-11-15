@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class JwtHelper {
+
     private static final Key SECRET_KEY = Jwts.SIG.HS256.key().build();
     private static final int Hours = 12;
 
@@ -43,7 +44,6 @@ public class JwtHelper {
                 .map(GrantedAuthority::getAuthority)
                 .orElse(null);
         return username.equals(userDetails.getUsername()) && role.equals(userDetailsRole) && !isTokenExpired(token);
-
     }
 
     private static Claims getTokenBody(String token) {
