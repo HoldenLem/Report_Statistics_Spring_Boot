@@ -1,6 +1,5 @@
 package com.sales.report.users;
 
-import com.mongodb.DuplicateKeyException;
 import com.sales.report.users.model.UserConvector;
 import com.sales.report.users.model.UserDTO;
 import lombok.AllArgsConstructor;
@@ -19,18 +18,17 @@ public class UserService {
 
     public void signup(UserDTO userDTO) {
         User user = UserConvector.from(userDTO);
+        String email = user.getEmail();
+        if (repository.existsByEmail(email)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("User with the email address '%s' already exists", email));
+        }
         if (repository.count() == 0) {
             user.setRole(Role.ADMIN);
         } else {
             user.setRole(Role.USER);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        try {
-            repository.save(user);
-        } catch (DuplicateKeyException e) {
-            String email = user.getEmail();
-            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("User with the email address '%s' already exists", email));
-        }
+        repository.save(user);
     }
 
     public User findByEmail(String email) {
