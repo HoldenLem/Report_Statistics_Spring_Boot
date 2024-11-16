@@ -8,29 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/auth")
 public class UserController {
 
     private final UserService service;
     private final AuthenticationManager authenticationManager;
 
-    @PostMapping("/signup")
+    @PostMapping("/auth/signup")
     public ResponseEntity<?> signup(@RequestBody UserDTO userDTO) {
         service.signup(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
         User user = service.findByEmail(userDTO.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -39,5 +35,10 @@ public class UserController {
                 List.of(new SimpleGrantedAuthority(user.getRole().name()))));
         String token = JwtHelper.generateToken(user);
         return ResponseEntity.ok(Map.of("token", token));
+    }
+
+    @GetMapping("/get")
+    public String get() {
+        return "Hello world!";
     }
 }

@@ -38,7 +38,7 @@ public class JwtHelper {
 
     public static boolean validateToken(String token, UserDetails userDetails) {
         String username = extractUsername(token);
-        String role = extractRole(token);
+        String role = "ROLE_" + extractRole(token);
         String userDetailsRole = userDetails.getAuthorities().stream()
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
