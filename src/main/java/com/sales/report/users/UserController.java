@@ -35,7 +35,7 @@ public class UserController {
         User user = service.findByEmail(userDTO.getEmail());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 user.getEmail(),
-                user.getPassword(),
+                userDTO.getPassword(),
                 List.of(new SimpleGrantedAuthority(user.getRole().name()))));
         String token = JwtHelper.generateToken(user);
         return ResponseEntity.ok(Map.of("token", token));
