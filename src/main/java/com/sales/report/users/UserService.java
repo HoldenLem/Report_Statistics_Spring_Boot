@@ -33,6 +33,6 @@ public class UserService {
 
     public User findByEmail(String email) {
         return repository.findByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User with the email address '%s' not found", email)));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("User does not exist, email: %s", email)));
     }
 }
