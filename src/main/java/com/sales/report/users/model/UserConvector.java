@@ -2,8 +2,10 @@ package com.sales.report.users.model;
 
 import com.sales.report.users.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+@Component
 public class UserConvector {
 
     public static UserDTO from(User user) {
@@ -20,7 +22,7 @@ public class UserConvector {
                 .email(userDTO.getEmail())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
-                .role(userDTO.getRole())
+                .password(userDTO.getPassword())
                 .build();
     }
 }
