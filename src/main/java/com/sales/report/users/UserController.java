@@ -36,4 +36,14 @@ public class UserController {
         String token = JwtHelper.generateToken(user);
         return ResponseEntity.ok(Map.of("token", token));
     }
+
+    @GetMapping("/get")
+    public String get() {
+        return "Hello world!";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
 }
