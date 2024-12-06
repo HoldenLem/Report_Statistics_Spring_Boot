@@ -7,6 +7,7 @@ import com.sales.report.statistics.report.Reports;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -41,5 +42,11 @@ public class StatisticsService {
             asinRepository.saveAll(statisticsByAsin.getSalesAndTrafficByAsin());
         }
 
+    }
+
+
+    @Cacheable(value = "statistic", key = "p0")
+    public StatisticsByDates findByDate(String date) {
+        return dateRepository.findByDate(date);
     }
 }

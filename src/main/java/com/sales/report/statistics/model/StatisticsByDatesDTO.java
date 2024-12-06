@@ -1,10 +1,13 @@
 package com.sales.report.statistics.model;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sales.report.statistics.sales.model.SalesByDateDTO;
 import com.sales.report.statistics.traffic.model.TrafficByDatesDTO;
 import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -13,8 +16,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonInclude
 public class StatisticsByDatesDTO {
-    private String date;
+    private LocalDate date;
     private SalesByDateDTO salesByDate;
     private TrafficByDatesDTO trafficByDate;
 }

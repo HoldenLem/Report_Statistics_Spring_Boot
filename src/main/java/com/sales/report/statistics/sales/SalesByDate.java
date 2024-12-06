@@ -1,5 +1,6 @@
 package com.sales.report.statistics.sales;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Accessors(chain = true)
 @SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@JsonInclude
 
 @Document(collection = "salesByDate")
 public class SalesByDate extends SalesByAsin {
