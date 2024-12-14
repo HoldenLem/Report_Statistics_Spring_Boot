@@ -5,6 +5,8 @@ import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 
 @Document(collection = "salesByAsin")
-public class SalesByAsin {
+public class SalesByAsin implements Serializable {
     private int unitsOrdered;
     private int unitsOrderedB2B;
     private Amount orderedProductSales;

@@ -7,6 +7,8 @@ import com.sales.report.statistics.traffic.TrafficByDates;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -24,8 +26,9 @@ import java.time.LocalDate;
 @JsonInclude
 public class StatisticsByDates implements Serializable {
     private static final long serialVersionUID = 1L;
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
-    public LocalDate date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
+    @Field("date")
+    private LocalDate date;
     private SalesByDate salesByDate;
     private TrafficByDates trafficByDate;
 }
