@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class StatisticsFacade implements CommandLineRunner {
     private final StatisticsService statisticService;
@@ -20,7 +22,8 @@ public class StatisticsFacade implements CommandLineRunner {
     }
 
 
-    public StatisticsByDatesDTO findByDate(String date) {
+    @Cacheable(value = "statistic", key = "#date")
+    public StatisticsByDatesDTO findByDate(LocalDate date) {
         return StatisticsMapper.from(statisticService.findByDate(date));
     }
 }

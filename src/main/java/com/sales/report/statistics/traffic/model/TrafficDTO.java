@@ -4,6 +4,8 @@ import lombok.*;
 import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -11,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Accessors(chain = true)
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class TrafficDTO {
+public class TrafficDTO implements Serializable {
     private int browserPageViews;
     private int browserPageViewsB2B;
     private int mobileAppPageViews;

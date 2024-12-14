@@ -3,15 +3,17 @@ package com.sales.report.statistics;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sales.report.statistics.report.Reports;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @Component
 @RequiredArgsConstructor
@@ -25,7 +27,8 @@ public class StatisticsService {
     public void initDatabase() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(JsonParser.Feature.INCLUDE_SOURCE_IN_LOCATION);
-
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         if (dateRepository.count() == 0) {
             Reports statisticsByDates = mapper.readValue(
                     new ClassPathResource("test_report.json").getInputStream(),
@@ -41,12 +44,9 @@ public class StatisticsService {
             );
             asinRepository.saveAll(statisticsByAsin.getSalesAndTrafficByAsin());
         }
-
     }
 
-
-    @Cacheable(value = "statistic", key = "p0")
-    public StatisticsByDates findByDate(String date) {
+    public StatisticsByDates findByDate(LocalDate date) {
         return dateRepository.findByDate(date);
     }
 }

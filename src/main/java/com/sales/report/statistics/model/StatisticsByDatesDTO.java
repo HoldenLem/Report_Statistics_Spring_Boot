@@ -7,6 +7,7 @@ import com.sales.report.statistics.traffic.model.TrafficByDatesDTO;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @JsonInclude
-public class StatisticsByDatesDTO {
+public class StatisticsByDatesDTO implements Serializable {
     private LocalDate date;
     private SalesByDateDTO salesByDate;
     private TrafficByDatesDTO trafficByDate;
